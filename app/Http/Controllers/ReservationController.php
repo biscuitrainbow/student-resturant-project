@@ -39,12 +39,17 @@ class ReservationController extends Controller
             'date_time' => '2017-01-01 00:00:00'
             
         ]);
-
+            return redirect('reservation');
             
     }
     public function index()
     {
         $reservations = Reservation::all();
         return view('reservation-index',compact('reservations'));
+    }
+    public function delete(Reservation $reservation)
+    {
+        $reservation->delete();
+        return redirect()->back();
     }
 }
