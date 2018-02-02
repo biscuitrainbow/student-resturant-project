@@ -32,6 +32,10 @@ Route::get('/user/delete/{user}', 'UserController@delete');
 Route::get('/reservation/create', 'ReservationController@create')->middleware('auth');
 Route::get('/reservation/next', 'ReservationController@next')->middleware('auth');
 Route::post('/reservation/receipt', 'ReservationController@receipt')->middleware('auth');
+Route::get('/reservation/', 'ReservationController@index')->middleware('auth');
+Route::get('/reservation/edit/{reservation}', 'ReservationController@edit')->middleware('auth');
+Route::post('/reservation/edit/{reservation}', 'ReservationController@save')->middleware('auth');
+Route::get('/reservation/delete/{reservation}', 'ReservationController@delete')->middleware('auth');
 
 Route::get('/table/create', 'TableController@create')->middleware('auth');
 Route::post('/table/create', 'TableController@store')->middleware('auth');

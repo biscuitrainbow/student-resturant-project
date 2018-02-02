@@ -23,16 +23,16 @@
                   <div class="flex h-full justify-between">
                     <div class="flex self-end">
                        <div class="item">
-                          <a href="/food/edit/{{$menu->id}}">
-                              <button class="mini ui blue button">
-                                  Edit
-                              </button>
-                          </a>
-                          <a href="/food/delete/{{$menu->id}}">
-                              <button class="mini ui red button">
-                                  Delete
-                            </button>
-                          </a>
+                            <a href="/food/edit/{{$menu->id}}">
+                                <button class="ui compact icon button">
+                                    <i class="write icon"></i>
+                                </button>
+                            </a>
+                            <a href="/food/delete/{{$menu->id}}">
+                                <button class="ui compact icon button">
+                                    <i class="trash icon"></i>
+                                </button>
+                            </a>
                        </div> 
                     </div>
                     <p class="text-2xl self-end">{{$menu->price}} บาท</p>
