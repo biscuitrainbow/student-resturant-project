@@ -13,6 +13,7 @@
             <th>นามสกุล</th>
             <th>เบอร์โทรศัพท์</th>
             <th>วัน/เวลา</th>
+            <th>จำนวนที่นั่ง</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -43,7 +44,9 @@
             </td>
             <td>
                 {{$reservation->date_time}}
-            </td>         
+            </td> 
+            <td>
+                {{$reservation->seat}}        
             <td>
                 {{--  <a href="/reservation/edit/{{$reservation->id}}">
                     <button class="ui compact icon button">

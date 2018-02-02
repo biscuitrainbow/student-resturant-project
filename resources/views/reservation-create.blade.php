@@ -31,7 +31,7 @@
       </div>
        <div class="field w-2/5">
          <label>จำนวนคน</label>
-         <input type="text" name="set" placeholder="จำนวนคน">
+         <input type="text" name="seat" placeholder="จำนวนคน">
        </div>
       <div class="field w-2/5">
         <label>โต๊ะ</label>

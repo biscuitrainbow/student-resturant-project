@@ -36,6 +36,7 @@ class ReservationController extends Controller
             'tel' => $detail['tel'],
             'member_id' => $detail['member'],
             'user_id' => Auth::user()->id,
+            'seat' => $detail['seat'],
             'date_time' => '2017-01-01 00:00:00'
             
         ]);
