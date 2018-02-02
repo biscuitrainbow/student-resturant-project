@@ -15,21 +15,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>A1</td>
-            <td>4</td>
-            <td>ธรรมดา</td>
+         @foreach($tables as $table)
+         <tr>
+            <td>{{$table->name}}</td>
+            <td>{{$table->seat}}</td>
+            <td>{{$table->type->name}}</td>
           </tr>
-          <tr>
-            <td>B1</td>
-            <td>4</td>
-            <td>ธรรมดา</td>
-          </tr>
-          <tr>
-            <td>B2</td>
-            <td>4</td>
-            <td>ธรรมดา</td>
-          </tr>
+         @endforeach
         </tbody>
       </table>
 @endsection

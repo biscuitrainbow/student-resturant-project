@@ -9,23 +9,20 @@
 <table class="ui basic table">
         <thead>
           <tr>
-            <th>ชื่อเมนุ</th>          
+            <th>ชื่อเมนุ</th>   
+            <th>ราคา</th>       
             <th>ประเภท</th>
           </tr>
         </thead>
         <tbody>
+          @foreach($menus as $menu)
           <tr>
-            <td>ไข่เจียว</td>           
-            <td>ทอด</td>
+            <td>{{$menu->name}}</td>   
+            <td>{{$menu->price}}</td>        
+            <td>{{$menu->type->name}}</td>
           </tr>
-          <tr>
-            <td>ปลานึ่ง</td>
-            <td>นึ่ง</td>
-          </tr>
-          <tr>
-            <td>ผัดผัก</td>
-            <td>ผัด</td>
-          </tr>
+          @endforeach
+
         </tbody>
       </table>
 @endsection
