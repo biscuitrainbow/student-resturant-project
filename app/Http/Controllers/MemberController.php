@@ -32,4 +32,25 @@ class MemberController extends Controller
          $members = Member::all();
         return view('member-index' , compact('members'));
     }
+
+    public function edit(Member $member){
+        return view('member-edit',compact('member'));
+    }
+
+    public function save(Member $member,Request $request){
+        $member->update([
+            'code' => $request->code,
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'address' => $request->address,
+            'tel' => $request->tel,
+        ]);
+
+        return redirect('/member');
+    }
+
+    public function delete(Member $member){
+        $member->delete();
+        return redirect()->back();
+    }
 }

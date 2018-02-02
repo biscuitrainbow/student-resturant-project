@@ -28,11 +28,20 @@
                 <a href="/table" class="item">
                   โต๊ะอาหาร
                 </a>
+                <a href="/tabletype" class="item">
+                  ประเภทโต๊ะ
+                </a>
                 <a href="/food" class="item">
                   เมนูอาหาร
                 </a>
+                <a href="/menutype" class="item">
+                  ประเภทเมนูอาหาร
+                </a>
                 <a href="/member" class="item">
                   สมาชิก
+                </a>
+                <a href="/user" class="item">
+                  ผู้ใช้งาน
                 </a>
                 <div class="right menu">
                   {{--  <div class="item">
@@ -65,6 +74,10 @@
         $('.ui.radio.checkbox').checkbox();
         $('.ui.dropdown').dropdown();
         $('#example5').calendar();
-    </script>
+</script>
+
+@section('script')
+
+@show
 </body>
 </html>  

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class TableType extends Model
 {
-    //
+    protected $guarded = [];
 }

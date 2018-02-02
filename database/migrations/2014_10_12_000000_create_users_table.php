@@ -104,6 +104,15 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
+
+        Schema::create('reservations_tables', function (Blueprint $table) {
+            $table->integer('reservation_id')->unsigned();
+            $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->integer('table_id')->unsigned();
+            $table->foreign('table_id')->references('id')->on('tables');
+            $table->timestamps();
+        });
+
        
     }
 

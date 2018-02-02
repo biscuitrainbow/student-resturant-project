@@ -32,4 +32,29 @@ class TableController extends Controller
         $tables = Table::all();
         return view('table-index',compact('tables'));
     }
+
+    public function edit(Table $table)
+    {
+        $types =  TableType::all();
+        return view('table-edit',compact('table','types'));
+    }
+
+    public function save(Table $table,Request $request)
+    {
+        $table->update([
+            'name' => $request->name,
+            'seat' => $request->number_of_seat,
+            'table_type_id' => $request->type,
+        ]);
+
+        return redirect('/table');
+  
+    }
+    public function delete(Table $table)
+    {
+        $table->delete();
+        return redirect()->back();
+    }
+
+
 }
