@@ -6,7 +6,8 @@
           <h2 class="my-8">รายการอาหาร</h2>
           <form action="/reservation/receipt" method="post">
                {{csrf_field()}}
-              <input name="total_price" hidden v-bind:value="netPrice">
+              <input name="net_price" hidden v-bind:value="netPrice">
+              <input name="total_price" hidden v-bind:value="totalPrice">
               <input name="menus[]" hidden v-bind:value="JSON.stringify(menu)" v-for="menu in selectedFood">
               <input name="detail" hidden value="{{json_encode($detail)}}">
               <div class="item">

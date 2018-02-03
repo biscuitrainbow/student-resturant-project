@@ -2,6 +2,14 @@
 @section('content')
 <div class="flex justify-between">
     <h2 class="my-8">รายละเอียด</h2>
+    <div class="ui item">
+        <a href="/reservation/print/{{$reservation->id}}">
+            <button class="ui compact icon button">
+                <i class="print icon"></i>
+                Print
+            </button>
+        </a>
+    </div>
 </div>
 <table class="ui  green table">
       <thead>
@@ -62,9 +70,9 @@
                 </button>
             </a>  --}}
             <a href="/reservation/delete/{{$reservation->id}}">
-                <button class="ui compact icon button">
-                    <i class="trash icon"></i>
-                </button>
+                  <button class="ui compact icon button">
+                      <i class="trash icon"></i>
+                  </button>
             </a>
             
         </td>

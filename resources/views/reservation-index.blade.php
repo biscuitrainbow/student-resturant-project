@@ -1,10 +1,35 @@
 @extends('layout')
 @section('content')
+
 <div class="flex justify-between h-2/5 my-8">
-        <h2 class="">การสำรองที่นั่งทั้งหมด</h2>
-        <a href="/reservation/create">
-                <button class="ui button" type="submit" >สำรองที่นั่ง</button>
-        </a>
+    <h2 class="">รายงานสรุปการจอง</h2>
+    <a href="/reservation/print">
+        <button class="ui compact icon button">
+            <i class="print icon"></i>
+            Print
+        </button>
+    </a>
+</div>
+
+
+<div class="flex my-8">
+        <div class="ui statistic">
+                <div class="value">
+                      {{$reservations->count()}}
+                </div>
+                <div class="label">
+                      จำนวนการจองทั้งหมด
+                </div>
+        </div>
+
+        <div class="ui statistic">
+                <div class="value">
+                      {{$net_price}}
+                </div>
+                <div class="label">
+                      รายรับสุทธิ
+                </div>
+        </div>
 </div>
 
 <form action="/reservation" class="mb-8">

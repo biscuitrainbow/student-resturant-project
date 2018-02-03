@@ -15,7 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', 'TestController@hello');
+Route::get('/hello',function(){
+    return "Hello";
+});
 
 Route::get('/logout', 'UserController@logout');
 
@@ -32,11 +34,14 @@ Route::get('/user/{user}', 'UserController@show');
 Route::get('/reservation/create', 'ReservationController@create')->middleware('auth');
 Route::get('/reservation/next', 'ReservationController@next')->middleware('auth');
 Route::post('/reservation/receipt', 'ReservationController@receipt')->middleware('auth');
-Route::get('/reservation/', 'ReservationController@index')->middleware('auth');
+Route::get('/reservation/{print?}', 'ReservationController@index')->middleware('auth');
 Route::get('/reservation/edit/{reservation}', 'ReservationController@edit')->middleware('auth');
 Route::post('/reservation/edit/{reservation}', 'ReservationController@save')->middleware('auth');
 Route::get('/reservation/delete/{reservation}', 'ReservationController@delete')->middleware('auth');
 Route::get('/reservation/{reservation}', 'ReservationController@show')->middleware('auth');
+Route::get('/reservation/print/{reservation}', 'ReservationController@printReceipt')->middleware('auth');
+Route::get('/rev/print/', 'ReservationController@printReport')->middleware('auth');
+
 
 Route::get('/table/create', 'TableController@create')->middleware('auth');
 Route::post('/table/create', 'TableController@store')->middleware('auth');
