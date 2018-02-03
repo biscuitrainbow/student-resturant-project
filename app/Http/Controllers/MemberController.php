@@ -26,10 +26,16 @@ class MemberController extends Controller
 
         return redirect('/member');
     }
-    public function index()
+    public function index(Request $request)
     {
-        
-         $members = Member::all();
+        if ($request->filled('month') && $request->filled('year')){
+
+            $members = Member::whereYear('created_at', '=', $request->year)
+                             ->whereMonth('created_at', '=', $request->month)
+                             ->get();
+        }else {
+            $members = Member::all();
+        }
         return view('member-index' , compact('members'));
     }
 

@@ -1,11 +1,12 @@
 @extends('layout')
 @section('content')
-  <reservation-food inline-template :menus="{{$menus}}">
+  <reservation-food inline-template :menus="{{$menus}}"  :member="{{$member}}">
     <div>
       <div class="flex justify-between">
           <h2 class="my-8">รายการอาหาร</h2>
           <form action="/reservation/receipt" method="post">
                {{csrf_field()}}
+              <input name="total_price" hidden v-bind:value="netPrice">
               <input name="menus[]" hidden v-bind:value="JSON.stringify(menu)" v-for="menu in selectedFood">
               <input name="detail" hidden value="{{json_encode($detail)}}">
               <div class="item">
@@ -25,10 +26,30 @@
             <tbody>
               <tr v-for="menu in selectedFood">
                 <td >@{{menu.name}}</td>
-                <td>@{{menu.qty}}</td>
-                <td>@{{menu.price}}</td>
+                <td>
+                  <button class="ui icon mini basic button mr-4" @click="decrease(menu)">
+                    <i class="minus icon"></i>
+                  </button>
+                      <span class="px-4">@{{menu.qty}}</span>
+                  <button class="ui icon mini basic button ml-4" @click="increase(menu)">
+                    <i class="plus icon"></i>
+                  </button>
+                </td>
+                <td>@{{menu.price * menu.qty}}</td>
               </tr>
             </tbody>
+            <tfoot>
+                <tr class="bg-grey-lighter">
+                    <th>Total price</th>
+                  <th></th>
+                  <th>@{{totalPrice}}</th>
+                </tr>
+                <tr class="bg-grey-lighter">
+                    <th>Net price</th>
+                    <th></th>
+                    <th class="text-xl">@{{netPrice}}</th>
+                  </tr>
+            </tfoot>
           </table>
     
           <h3 class="my-8">อาหารทั้งหมด</h3>

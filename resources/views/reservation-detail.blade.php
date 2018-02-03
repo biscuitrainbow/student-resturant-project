@@ -3,7 +3,7 @@
 <div class="flex justify-between">
     <h2 class="my-8">รายละเอียด</h2>
 </div>
-<table class="ui basic table">
+<table class="ui  green table">
       <thead>
       <tr>
         <th>ชื่อ</th>

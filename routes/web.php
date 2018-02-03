@@ -69,7 +69,7 @@ Route::post('/menutype/edit/{menu_type}', 'MenuTypeController@save')->middleware
 Route::get('/menutype/delete/{menu_type}', 'MenuTypeController@delete')->middleware('auth');
 
 
-Route::get('/member', 'MemberController@index')->middleware('auth');
+Route::get('/member', 'MemberController@index')->middleware('admin');
 Route::get('/member/create', 'MemberController@create')->middleware('auth');
 Route::post('/member/create', 'MemberController@store')->middleware('auth');
 Route::get('/member/edit/{member}', 'MemberController@edit')->middleware('auth');

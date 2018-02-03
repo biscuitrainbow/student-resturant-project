@@ -27,13 +27,18 @@ class ReservationController extends Controller
     }
 
     public function next(Request $request){
-        $menus = Menu::all();
+        $menus = Menu::with('type')->get();
         $detail = $request->all();
-        return view('reservation-food',compact('menus','detail'));
+
+        if($request->filled('member')) $member = 1;
+        else $member = 0;
+
+        return view('reservation-food',compact('menus','detail','member'));
     }
 
 
     public function receipt(Request $request){
+
         $detail = json_decode($request->detail, true);
         
         $reservation = Reservation::create([
@@ -44,6 +49,7 @@ class ReservationController extends Controller
             'user_id' => Auth::user()->id,
             'seat' => $detail['seat'],
             'type' => $detail['type'],
+            'total_price' => $request->total_price,
             'date_time' => '2017-01-01 00:00:00'
         ]);
 
@@ -61,9 +67,18 @@ class ReservationController extends Controller
         return redirect('reservation');
             
     }
-    public function index()
+    public function index(Request $request)
     {
-        $reservations = Reservation::all();
+        if ($request->filled('month') && $request->filled('year')&& $request->filled('type')){
+
+            $reservations = Reservation::whereYear('created_at', '=', $request->year)
+                             ->whereMonth('created_at', '=', $request->month)
+                             ->where('type', '=', $request->type)
+                             ->get();
+        }else{
+            $reservations = Reservation::all();
+        }
+        
         return view('reservation-index',compact('reservations'));
     }
     public function delete(Reservation $reservation)

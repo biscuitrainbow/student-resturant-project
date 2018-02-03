@@ -15,4 +15,9 @@ class User extends Authenticatable
     public function reservations(){
         return $this->hasMany(Reservation::class,'user_id');
     }
+
+
+    public function type(){
+        return $this->belongsTo(UserType::class,'user_id');
+    }
 }

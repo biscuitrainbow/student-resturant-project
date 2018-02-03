@@ -15,7 +15,6 @@
     </div>
     
     <button class="ui button w-2/5" type="submit">เข้าสู่ระบบ</button>
-    <a class="mt-8" href="/register">เพิ่มบัญชีผู้ใช้</a>
 
   </form>
   

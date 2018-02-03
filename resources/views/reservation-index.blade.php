@@ -7,7 +7,7 @@
         </a>
 </div>
 
-<form action="" class="mb-8">
+<form action="/reservation" class="mb-8">
     <div class="flex items-center">
             <div class="field w-1/5 mr-8">
                     <label class="">เดือน</label>
@@ -34,7 +34,7 @@
                     </div>
             </div>
 
-            <div class="field w-1/5">
+            <div class="field w-1/5 mr-8">
                     <label class="">ปี</label>
                     <div class="ui fluid search selection dropdown mt-2">
                         <input type="hidden" name="year">
@@ -42,10 +42,23 @@
                         <div class="default text">Select Year</div>
                         <div class="menu">
                         
-                        <div class="item" data-value="2017" value="2017">2017</div>
+                        <div class="item" data-value="2018" value="2018">2018</div>
                         </div>
                     </div>
             </div>
+            <div class="field w-1/5">
+                <label class="">ประเภท</label>
+                <div class="ui fluid search selection dropdown mt-2">
+                    <input type="hidden" name="type">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">Select Type</div>
+                    <div class="menu">
+                    
+                    <div class="item" data-value="กินที่ร้าน" value="กินที่ร้าน">กินที่ร้าน</div>
+                    <div class="item" data-value="สั่งกลับบ้าน" value="สั่งกลับบ้าน">สั่งกลับบ้าน</div>
+                    </div>
+                </div>
+        </div>
 
             <div class="ui item mt-6 ml-6">
                 <button class="ui button" type="submit" >เรียกดูข้อมูล</button>
@@ -62,6 +75,7 @@
             <th>วัน/เวลา</th>
             <th>จำนวนที่นั่ง</th>
             <th>ประเภท</th>
+            <th>ราคารวม</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -95,10 +109,13 @@
             </td> 
             <td>
                 {{$reservation->seat}}  
-            </td>      
+            </td>  
             <td>
-            <a class="ui green label">{{$reservation->type}}</a>
+                <a class="ui green label">{{$reservation->type}}</a>
             </td>
+            <td>
+                {{$reservation->total_price}} .-
+            </td>      
             <td>
                 {{--  <a href="/reservation/edit/{{$reservation->id}}">
                     <button class="ui compact icon button">

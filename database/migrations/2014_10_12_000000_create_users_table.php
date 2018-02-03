@@ -87,6 +87,8 @@ class CreateUsersTable extends Migration
             $table->string('lastname')->nullable();
             $table->text('address')->nullable();
             $table->string('tel')->nullable();
+            $table->integer('seat')->nullable();
+            $table->float('total_price')->nullable();
             $table->integer('member_id')->unsigned()->nullable();
             $table->foreign('member_id')->references('id')->on('members');
             $table->integer('user_id')->unsigned();
