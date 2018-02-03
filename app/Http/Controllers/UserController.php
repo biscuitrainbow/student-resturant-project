@@ -20,6 +20,10 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function show(User $user){
+        return view('user-detail', compact('user'));
+    }
+
     public function login()
     {
         return view('login');

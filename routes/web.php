@@ -27,6 +27,7 @@ Route::post('/register', 'UserController@store');
 
 Route::get('/user', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
+Route::get('/user/{user}', 'UserController@show');
 
 
 Route::get('/reservation/create', 'ReservationController@create')->middleware('auth');

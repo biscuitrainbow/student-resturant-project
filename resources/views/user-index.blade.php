@@ -32,7 +32,13 @@
                         <i class="trash icon"></i>
                     </button>
                 </a>
+                <a href="/user/{{$user->id}}">
+                    <button class="ui compact icon button">
+                        <i class="eye icon"></i>
+                    </button>
+                </a>
             </td>
+                
           </tr>
         @endforeach
 

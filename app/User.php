@@ -11,4 +11,8 @@ class User extends Authenticatable
 
     protected $guarded = array();
     protected $username = 'username';
+
+    public function reservations(){
+        return $this->hasMany(Reservation::class,'user_id');
+    }
 }
