@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/semantic/semantic.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
@@ -20,7 +22,7 @@
     </style>
 </head>
 <body>
-   <div class="ui container">
+   <div id="app" class="ui container">
         <div class="ui secondary  menu">
                 <a href="/reservation/create" class="active item">
                   สำรองที่นั่ง
@@ -67,6 +69,7 @@
    crossorigin="anonymous">
 </script>
 <script src="/semantic/semantic.js"></script>  --}}
+<script src="/js/app.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.js"></script>

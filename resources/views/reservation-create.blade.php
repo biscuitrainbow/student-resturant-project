@@ -17,6 +17,19 @@
          <input type="text" name="tel" placeholder="เบอร์โทรศัพท์">
        </div>
        <div class="field w-2/5">
+        <label>สมาชิก</label>
+        <div class="ui fluid search selection dropdown">
+             <input type="hidden" name="member">
+             <i class="dropdown icon"></i>
+             <div class="default text">Select Member</div>
+             <div class="menu">
+             @foreach($members as $member)
+             <div class="item" data-value="{{ $member->id }}" value="{{$member->id}}">{{ $member->name . ' ' . $member->lastname }}</div>
+             @endforeach
+         </div>
+            </div>
+      </div>
+       <div class="field w-2/5">
          <label>จำนวนคน</label>
          <input type="text" name="set" placeholder="จำนวนคน">
        </div>
