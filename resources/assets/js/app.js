@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('reservation-food', require('./components/ReservationFood.vue'));
+Vue.component('reservation-info', require('./components/ReservationInfo.vue'));
 
 const app = new Vue({
     el: '#app'

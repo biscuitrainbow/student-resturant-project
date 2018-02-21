@@ -33,6 +33,21 @@
          <label>จำนวนคน</label>
          <input type="text" name="seat" placeholder="จำนวนคน">
        </div>
+       <div class="inline fields">
+    <label>การสั่งอาหาร</label>
+    <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="type" value="กินที่ร้าน" checked="checked">
+          <label>กินที่ร้าน</label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="type" value="สั่งกลับบ้าน">
+          <label>สั่งกลับบ้าน</label>
+        </div>
+      </div>
+    </div>
       <div class="field w-2/5">
         <label>โต๊ะ</label>
         <select name="table[]" multiple="" class="ui fluid dropdown">

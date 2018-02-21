@@ -11,4 +11,12 @@ class Reservation extends Model
     public function member(){
         return $this->belongsTo(Member::class,'member_id');
     }
+
+    public function tables(){
+        return $this->belongsToMany(Table::class,'reservations_tables')->withTimestamps();
+    }
+
+    public function menus(){
+        return $this->belongsToMany(Menu::class,'reservations_menus')->withTimestamps();
+    }
 }

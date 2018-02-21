@@ -30,17 +30,29 @@ class ReservationController extends Controller
     public function receipt(Request $request){
         $detail = json_decode($request->detail, true);
         
-        Reservation::create([
+        $reservation = Reservation::create([
             'name' => $detail['name'],
             'lastname' => $detail['lastname'],
             'tel' => $detail['tel'],
             'member_id' => $detail['member'],
             'user_id' => Auth::user()->id,
             'seat' => $detail['seat'],
+            'type' => $detail['type'],
             'date_time' => '2017-01-01 00:00:00'
-            
         ]);
-            return redirect('reservation');
+
+        if(isset($detail['table'] )){
+            $tables = collect($detail['table']);
+            $reservation->tables()->sync($tables);
+        }
+
+        $menus = collect($request->menus);
+        $menus->each(function($menu) use($reservation){
+            $item = json_decode($menu,true);
+            $reservation->menus()->attach([$item['id'] => ['quantity' => $item['qty']]]);
+        });
+
+        return redirect('reservation');
             
     }
     public function index()
