@@ -17,6 +17,6 @@ class Reservation extends Model
     }
 
     public function menus(){
-        return $this->belongsToMany(Menu::class,'reservations_menus')->withTimestamps();
+        return $this->belongsToMany(Menu::class,'reservations_menus')->withTimestamps()->withPivot('quantity');
     }
 }

@@ -14,6 +14,7 @@
             <th>เบอร์โทรศัพท์</th>
             <th>วัน/เวลา</th>
             <th>จำนวนที่นั่ง</th>
+            <th>ประเภท</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -46,7 +47,11 @@
                 {{$reservation->date_time}}
             </td> 
             <td>
-                {{$reservation->seat}}        
+                {{$reservation->seat}}  
+            </td>      
+            <td>
+            <a class="ui green label">{{$reservation->type}}</a>
+            </td>
             <td>
                 {{--  <a href="/reservation/edit/{{$reservation->id}}">
                     <button class="ui compact icon button">
@@ -56,6 +61,11 @@
                 <a href="/reservation/delete/{{$reservation->id}}">
                     <button class="ui compact icon button">
                         <i class="trash icon"></i>
+                    </button>
+                </a>
+                <a href="/reservation/{{$reservation->id}}">
+                    <button class="ui compact icon button">
+                        <i class="eye icon"></i>
                     </button>
                 </a>
             </td>

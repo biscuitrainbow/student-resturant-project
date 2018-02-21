@@ -13,6 +13,12 @@ use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
+
+    public function show(Reservation $reservation)
+    {
+        $reservation->menus;
+        return view('reservation-detail',compact('reservation'));
+    }
     public function create()
     {
         $members = Member::all();

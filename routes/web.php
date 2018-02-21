@@ -36,6 +36,7 @@ Route::get('/reservation/', 'ReservationController@index')->middleware('auth');
 Route::get('/reservation/edit/{reservation}', 'ReservationController@edit')->middleware('auth');
 Route::post('/reservation/edit/{reservation}', 'ReservationController@save')->middleware('auth');
 Route::get('/reservation/delete/{reservation}', 'ReservationController@delete')->middleware('auth');
+Route::get('/reservation/{reservation}', 'ReservationController@show')->middleware('auth');
 
 Route::get('/table/create', 'TableController@create')->middleware('auth');
 Route::post('/table/create', 'TableController@store')->middleware('auth');
