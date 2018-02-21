@@ -29,7 +29,6 @@ Route::get('/user', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
 Route::get('/user/{user}', 'UserController@show');
 
-
 Route::get('/reservation/create', 'ReservationController@create')->middleware('auth');
 Route::get('/reservation/next', 'ReservationController@next')->middleware('auth');
 Route::post('/reservation/receipt', 'ReservationController@receipt')->middleware('auth');
@@ -76,3 +75,8 @@ Route::post('/member/create', 'MemberController@store')->middleware('auth');
 Route::get('/member/edit/{member}', 'MemberController@edit')->middleware('auth');
 Route::post('/member/edit/{member}', 'MemberController@save')->middleware('auth');
 Route::get('/member/delete/{member}', 'MemberController@delete')->middleware('auth');
+
+
+Route::get('/report/reservation','ReportController@reservation')->middleware('auth');
+Route::get('/report/takehome','ReportController@takehome')->middleware('auth');
+Route::get('/report/member','ReportController@member')->middleware('auth');

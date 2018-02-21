@@ -22,13 +22,14 @@
              <input type="hidden" name="member">
              <i class="dropdown icon"></i>
              <div class="default text">Select Member</div>
-             <div class="menu">
-             @foreach($members as $member)
-             <div class="item" data-value="{{ $member->id }}" value="{{$member->id}}">{{ $member->name . ' ' . $member->lastname }}</div>
+              <div class="menu">
+              @foreach($members as $member)
+              <div class="item" data-value="{{ $member->id }}" value="{{$member->id}}">{{ $member->name . ' ' . $member->lastname }}
+              </div>
              @endforeach
-         </div>
             </div>
-      </div>
+            </div>
+       </div>
        <div class="field w-2/5">
          <label>จำนวนคน</label>
          <input type="text" name="seat" placeholder="จำนวนคน">
