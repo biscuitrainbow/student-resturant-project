@@ -87,13 +87,13 @@
     <tr>
       <td>ชื่อ</td>
       <td>จำนวน</td>
-      <td>ราคา</td>
+      <td>ราคา (ส่วนลด)</td>
     </tr>
     @foreach($reservation->menus as $menu)
     <tr>
       <td>{{$menu->name}}</td>
       <td>{{$menu->pivot->quantity}}</td>
-      <td>{{$menu->price}}</td>
+      <td>{{$menu->price}} ({{$menu->pivot->discount}})</td>
     </tr>
     @endforeach
     <tr>

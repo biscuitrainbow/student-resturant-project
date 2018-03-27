@@ -9,13 +9,13 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello',function(){
+Route::get('/hello', function () {
     return "Hello";
 });
 
@@ -38,10 +38,10 @@ Route::get('/reservation/{print?}', 'ReservationController@index')->middleware('
 Route::get('/reservation/edit/{reservation}', 'ReservationController@edit')->middleware('auth');
 Route::post('/reservation/edit/{reservation}', 'ReservationController@save')->middleware('auth');
 Route::get('/reservation/delete/{reservation}', 'ReservationController@delete')->middleware('auth');
-Route::get('/reservation/{reservation}', 'ReservationController@show')->middleware('auth');
+Route::get('/reservation/show/{reservation}', 'ReservationController@show')->middleware('auth');
 Route::get('/reservation/print/{reservation}', 'ReservationController@printReceipt')->middleware('auth');
 Route::get('/rev/print/', 'ReservationController@printReport')->middleware('auth');
-
+Route::get('/rev/filter/test', 'ReservationController@filter');
 
 Route::get('/table/create', 'TableController@create')->middleware('auth');
 Route::post('/table/create', 'TableController@store')->middleware('auth');
@@ -82,6 +82,6 @@ Route::post('/member/edit/{member}', 'MemberController@save')->middleware('auth'
 Route::get('/member/delete/{member}', 'MemberController@delete')->middleware('auth');
 
 
-Route::get('/report/reservation','ReportController@reservation')->middleware('auth');
-Route::get('/report/takehome','ReportController@takehome')->middleware('auth');
-Route::get('/report/member','ReportController@member')->middleware('auth');
+Route::get('/report/reservation', 'ReportController@reservation')->middleware('auth');
+Route::get('/report/takehome', 'ReportController@takehome')->middleware('auth');
+Route::get('/report/member', 'ReportController@member')->middleware('auth');

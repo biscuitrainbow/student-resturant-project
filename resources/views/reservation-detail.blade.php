@@ -93,7 +93,7 @@
               <tr>
                 <th>ชื่อ</th>
                 <th>จำนวน</th>
-                <th>ราคา</th>
+                <th>ราคา (ส่วนลด)</th>
               </tr>
             </thead>
             <tbody>
@@ -101,10 +101,22 @@
               <tr>
                 <td>{{$menu->name}}</td>
                 <td>{{$menu->pivot->quantity}}</td>
-                <td>{{$menu->price}}</td>
+                <td>{{$menu->price}} <span class="font-light text-grey">({{$menu->pivot->discount}})</span></td>
               </tr>
               @endforeach
             </tbody>
+            <tfoot>
+                <tr class="bg-grey-lighter">
+                    <th>Total price</th>
+                  <th></th>
+                  <th>{{$reservation->total_price}}</th>
+                </tr>
+                <tr class="bg-grey-lighter">
+                    <th>Net price</th>
+                    <th></th>
+                    <th class="text-xl">{{$reservation->net_price}}</th>
+                  </tr>
+            </tfoot>
           </table>              
     </div>
 @endsection

@@ -9,7 +9,7 @@
 <table class="ui basic table">
           @foreach($menus as $menu)
           <div class="flex my-8 p-4 bg-grey-lighter shadow">
-              <img class="w-48 h-48 rounded mr-8" src="{{Storage::url($menu->img)}}" alt="">
+              <img class="w-48 h-48 rounded mr-8" src="{{$menu->img}}" alt="">
               <div class="flex flex-col">
                   <div class="flex items-center">
                       <p class="text-2xl mr-4">{{$menu->name}}</p>       

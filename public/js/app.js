@@ -43192,59 +43192,70 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['menus', 'member'],
-    data: function data() {
-        return {
-            netPrice: 0,
-            totalPrice: 0,
-            selectedFood: []
-        };
-    },
-    methods: {
-        add: function add(food) {
-            food.qty = 1;
-            this.netPrice += food.price * food.qty;
-            this.selectedFood.push(food);
-
-            this.totalPrice += food.price;
-
-            if (this.member == 1) {
-                // if(!this.food.type.name === "อาหารชุด" || !this.food.type.name === "เครื่องดื่ม"){
-                var discountPrice = food.price * .10;
-                this.netPrice = this.netPrice - discountPrice;
-                // }
-            }
-        },
-
-        increase: function increase(food) {
-            food.qty++;
-
-            this.netPrice += food.price;
-            this.totalPrice += food.price;
-
-            if (this.member == 1) {
-                // if(!this.food.type.name === 'อาหารชุด' || !this.food.type.name === 'เครื่องดื่ม'){
-                var discountPrice = food.price * .10;
-                this.netPrice = this.netPrice - discountPrice;
-                //}
-            }
-        },
-
-        decrease: function decrease(food) {
-            food.qty--;
-
-            this.netPrice -= food.price;
-            his.totalPrice += food.price;
-
-            if (this.member == 1) {
-                //  if(!this.food.type.name === 'อาหารชุด' || !his.food.type.name === 'เครื่องดื่ม'){
-
-                var discountPrice = food.price * .10;
-                this.netPrice = this.netPrice + discountPrice;
-            }
+  props: ["menus", "member", "accumulate"],
+  data: function data() {
+    return {
+      netPrice: 0,
+      totalPrice: 0,
+      selectedFood: []
+    };
+  },
+  methods: {
+    add: function add(food) {
+      if (this.member == 1) {
+        if (food.type.name !== "อาหารชุด" && food.type.name !== "เครื่องดื่ม") {
+          this.netPrice += food.price - food.price * 0.1;
+          this.totalPrice += food.price;
+          food.discount = food.price * 0.1;
+        } else {
+          this.netPrice += food.price;
+          this.totalPrice += food.price;
+          food.discount = 0;
         }
-    }
+      } else {
+        this.netPrice += food.price;
+        this.totalPrice += food.price;
+        food.discount = 0;
+      }
 
+      food.qty = 1;
+      this.selectedFood.push(food);
+    },
+
+    increase: function increase(food) {
+      food.qty++;
+
+      if (this.member == 1) {
+        if (food.type.name !== "อาหารชุด" && food.type.name !== "เครื่องดื่ม") {
+          this.netPrice += food.price - food.price * 0.1;
+          this.totalPrice += food.price;
+        } else {
+          this.netPrice += food.price;
+          this.totalPrice += food.price;
+        }
+      } else {
+        this.netPrice += food.price;
+        this.totalPrice += food.price;
+      }
+    },
+
+    decrease: function decrease(food) {
+      food.qty--;
+
+      if (this.member == 1) {
+        if (food.type.name !== "อาหารชุด" && food.type.name !== "เครื่องดื่ม") {
+          this.netPrice -= food.price - food.price * 0.1;
+          this.totalPrice -= food.price;
+        } else {
+          this.netPrice -= food.price;
+          this.totalPrice -= food.price;
+        }
+      } else {
+        this.netPrice -= food.price;
+        this.totalPrice -= food.price;
+      }
+    }
+  }
 });
 
 /***/ }),

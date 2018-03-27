@@ -17,7 +17,6 @@ class ReservationController extends Controller
 
     public function show(Reservation $reservation)
     {
-        $reservation->menus;
         return view('reservation-detail', compact('reservation'));
     }
     public function create()
@@ -32,10 +31,23 @@ class ReservationController extends Controller
         $menus = Menu::with('type')->get();
         $detail = $request->all();
 
-        if ($request->filled('member')) $member = 1;
-        else $member = 0;
+        if ($request->filled('member')) {
+            $member = 1;
 
-        return view('reservation-food', compact('menus', 'detail', 'member'));
+            $m = Member::find($request->member);;
+
+            $accumulate_array = $m->reservations->map(function ($item, $key) {
+                return $item->net_price;
+            });
+
+            $accumulate = $accumulate_array->sum() % 10000;
+
+        } else {
+            $member = 0;
+            $ac_net_price = 0;
+        }
+
+        return view('reservation-food', compact('menus', 'detail', 'member', 'accumulate'));
     }
 
 
@@ -55,7 +67,7 @@ class ReservationController extends Controller
             'total_price' => $request->total_price,
             'net_price' => $request->net_price,
 
-            'date_time' => '2017-01-01 00:00:00'
+            'date_time' => Carbon::instance(new \DateTime($detail['date_time']))->toDateTimeString()
         ]);
 
         if (isset($detail['table'])) {
@@ -66,43 +78,28 @@ class ReservationController extends Controller
         $menus = collect($request->menus);
         $menus->each(function ($menu) use ($reservation) {
             $item = json_decode($menu, true);
-            $reservation->menus()->attach([$item['id'] => ['quantity' => $item['qty']]]);
+            $reservation->menus()->attach([$item['id'] => ['quantity' => $item['qty'], 'discount' => $item['discount'] * $item['qty']]]);
         });
 
         return redirect('reservation');
 
     }
-    public function index(Request $request,$print = null)
+    public function index(Request $request, $print = null)
     {
+        $reservations = Reservation::filter($request->all())->get();
+        $price_array = $reservations->map(function ($item, $key) {
+            return $item->net_price;
+        });
 
-        if ($request->filled('month') && $request->filled('year') && $request->filled('type')) {
+        $net_price = $price_array->sum();
 
-            $reservations = Reservation::whereYear('created_at', '=', $request->year)
-                ->whereMonth('created_at', '=', $request->month)
-                ->where('type', '=', $request->type)
-                ->get();
-
-            $price_array = $reservations->map(function ($item, $key) {
-                return $item->net_price;
-            });
-
-            $net_price = $price_array->sum();
-        } else {
-            $reservations = Reservation::all();
-
-            $price_array = $reservations->map(function ($item, $key) {
-                return $item->net_price;
-            });
-
-            $net_price = $price_array->sum();
-        }
-
-        if($print){
+        if ($request->has('print')) {
             $pdf = PDF::loadView('reservation-index-pdf', compact('reservations', 'net_price'));
             return $pdf->download('invoice.pdf');
         }
 
-        return view('reservation-index', compact('reservations', 'net_price'));
+        $fullUrl = $request->fullUrl();
+        return view('reservation-index', compact('reservations', 'net_price', 'fullUrl'));
     }
     public function delete(Reservation $reservation)
     {
@@ -126,5 +123,10 @@ class ReservationController extends Controller
         //$pdf = PDF::loadView('reservation-pdf', compact('reservation'));
         //return $pdf->download('invoice.pdf');
          ///return view('reservation-pdf',compact('reservation'));
+    }
+
+    public function filter(Request $request)
+    {
+        return Reservation::filter($request->all())->get();
     }
 }

@@ -18,7 +18,7 @@
              @foreach($types as $type)
              <div class="field">
                 <div class="ui radio checkbox">
-                  <input type="radio" name="type" checked=""  value="{{$type->id}}" tabindex="0" class="hidden">
+                  <input type="radio" name="type"  value="{{$type->id}}" tabindex="0" class="hidden">
                   <label>{{$type->name}}</label>
                 </div>
               </div>

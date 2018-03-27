@@ -3,7 +3,7 @@
 
 <div class="flex justify-between h-2/5 my-8">
     <h2 class="">รายงานสรุปการจอง</h2>
-    <a href="/reservation/print">
+    <a href="{{$fullUrl}}&print">
         <button class="ui compact icon button">
             <i class="print icon"></i>
             Print
@@ -152,7 +152,7 @@
                         <i class="trash icon"></i>
                     </button>
                 </a>
-                <a href="/reservation/{{$reservation->id}}">
+                <a href="/reservation/show/{{$reservation->id}}">
                     <button class="ui compact icon button">
                         <i class="eye icon"></i>
                     </button>

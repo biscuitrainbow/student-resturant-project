@@ -17,13 +17,17 @@
        <div class="ui fluid search selection dropdown">
             <input type="hidden" name="type">
             <i class="dropdown icon"></i>
-            <div class="default text">Select Country</div>
+            <div class="default text">ประเภทอาหาร</div>
             <div class="menu">
             @foreach($menu_types as $type)
             <div class="item" data-value="{{ $type->id }}" value="{{$type->id}}">{{ $type->name }}</div>
             @endforeach
         </div>
-           </div>
+      </div>
+     </div>
+     <div class="field w-2/5">
+        <label>คำอธิบาย</label>
+        <textarea name="description" id="" cols="30" rows="2"></textarea>
      </div>
      <div class="field w-2/5">
         <label>รูปภาพ</label>

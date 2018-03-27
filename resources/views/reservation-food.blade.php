@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-  <reservation-food inline-template :menus="{{$menus}}"  :member="{{$member}}">
+  <reservation-food inline-template :menus="{{$menus}}"  :member="{{$member}}" :accumulate="{{$accumulate}}">
     <div>
       <div class="flex justify-between">
           <h2 class="my-8">รายการอาหาร</h2>
@@ -21,7 +21,7 @@
               <tr>
                 <th>ชื่อ</th>
                 <th>จำนวน</th>
-                <th>ราคา</th>
+                <th>ราคา(ส่วนลด)</th>
               </tr>
             </thead>
             <tbody>
@@ -36,7 +36,7 @@
                     <i class="plus icon"></i>
                   </button>
                 </td>
-                <td>@{{menu.price * menu.qty}}</td>
+                <td>@{{menu.price * menu.qty}} <span class="font-light text-grey">(@{{menu.discount * menu.qty}})</span></td>
               </tr>
             </tbody>
             <tfoot>
@@ -52,7 +52,12 @@
                   </tr>
             </tfoot>
           </table>
-    
+          <div v-show="netPrice + accumulate >= 10000" class="ui positive message">
+            <i class="close icon"></i>
+            <div class="header">
+              ลูกค้ามียอดรวมครบ 1000
+            </div>
+          </div>
           <h3 class="my-8">อาหารทั้งหมด</h3>
           <div class="ui grid mt-8">
                 <div v-for="menu in menus" class="four wide column">
@@ -64,7 +69,7 @@
                                         <div class="ui  horizontal label">@{{ menu.id }}</div>          
                                     </a></div>
                                   <div class="meta">
-                                    <img class="my-4" src="http://www.travelguruthailand.net/wp-content/uploads/2014/12/%E0%B9%80%E0%B8%A5%E0%B9%88%E0%B8%87%E0%B8%AB%E0%B8%87%E0%B8%A9%E0%B9%8C22.jpg" alt="">
+                                    <img class="my-4" :src="menu.img" alt="">
                                     <button @click="add(menu)" class="positive ui button w-full">@{{ menu.price }}</button>
     
                                   </div>
