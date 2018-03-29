@@ -28,40 +28,46 @@
   <div id="app" class="ui container">
     <div class="ui secondary  menu">
       <a href="/reservation/create" class="active item">
-                  สำรองที่นั่ง
-                </a>
+        สำรองที่นั่ง
+      </a>
       <a href="/reservation/" class=" item">
-                  ประวัติสำรองที่นั่ง
-                </a>
-      <a href="/table" class="item">
-                  โต๊ะอาหาร
-                </a>
-      <a href="/tabletype" class="item">
-                  ประเภทโต๊ะ
-                </a>
+        ประวัติสำรองที่นั่ง
+      </a>
+
+      @if(Auth::user()->type->name == 'admin')
+        <a href="/table" class="item">
+                    โต๊ะอาหาร
+        </a>
+      @endif
+
+      @if(Auth::user()->type->name == 'admin')
+        <a href="/tabletype" class="item">
+          ประเภทโต๊ะ
+        </a>
+      @endif
+
       <a href="/food" class="item">
-                  เมนูอาหาร
-                </a>
+        เมนูอาหาร
+      </a>
+
       <a href="/menutype" class="item">
-                  ประเภทเมนูอาหาร
-                </a>
+        ประเภทเมนูอาหาร
+      </a>
       <a href="/member" class="item">
-                  สมาชิก
-                </a>
+        สมาชิก
+      </a>
+      
+      @if(Auth::user()->type->name == 'admin')
       <a href="/user" class="item">
-                  ผู้ใช้งาน
-                </a>
+        ผู้ใช้งาน
+      </a>
+      @endif
+
       <div class="right menu">
-        {{--
-        <div class="item">
-          <div class="ui icon input">
-            <input type="text" placeholder="Search...">
-            <i class="search link icon"></i>
-          </div>
-        </div> --}}
-        <a href="/logout" class="ui item">
-                    Logout
-                  </a>
+      
+      <a href="/logout" class="ui item">
+        Logout
+      </a>
       </div>
     </div>
     
