@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('tel');
             $table->integer('user_type_id')->unsigned();
-            $table->foreign('user_type_id')->references('id')->on('user_types');
+            $table->foreign('user_type_id')->references('id')->on('user_types')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -43,16 +43,16 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('seat');
             $table->integer('table_type_id')->unsigned();
-            $table->foreign('table_type_id')->references('id')->on('table_types');
+            $table->foreign('table_type_id')->references('id')->on('table_types')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('menu_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-         
+
             $table->timestamps();
         });
 
@@ -62,9 +62,9 @@ class CreateUsersTable extends Migration
             $table->string('img');
             $table->integer('price');
             $table->integer('menu_type_id')->unsigned();
-            $table->foreign('menu_type_id')->references('id')->on('menu_types');
+            $table->foreign('menu_type_id')->references('id')->on('menu_types')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -77,7 +77,7 @@ class CreateUsersTable extends Migration
             $table->text('address');
             $table->string('tel');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -85,37 +85,40 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('lastname')->nullable();
-            $table->text('address')->nullable();
             $table->string('tel')->nullable();
             $table->integer('seat')->nullable();
+            $table->string('type')->nullable();
             $table->float('total_price')->nullable();
+            $table->float('net_price')->nullable();
+            $table->dateTime('date_time');
             $table->integer('member_id')->unsigned()->nullable();
-            $table->foreign('member_id')->references('id')->on('members');
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 
 
         Schema::create('reservations_menus', function (Blueprint $table) {
             $table->integer('reservation_id')->unsigned();
-            $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->integer('menu_id')->unsigned();
-            $table->foreign('menu_id')->references('id')->on('menus');
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             $table->integer('quantity');
+            $table->integer('discount');
             $table->timestamps();
         });
 
 
         Schema::create('reservations_tables', function (Blueprint $table) {
             $table->integer('reservation_id')->unsigned();
-            $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->integer('table_id')->unsigned();
             $table->foreign('table_id')->references('id')->on('tables');
             $table->timestamps();
         });
 
-       
+
     }
 
     /**

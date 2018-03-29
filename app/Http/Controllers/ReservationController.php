@@ -43,6 +43,7 @@ class ReservationController extends Controller
             $accumulate = $accumulate_array->sum() % 10000;
 
         } else {
+            $accumulate = -10000;
             $member = 0;
             $ac_net_price = 0;
         }
