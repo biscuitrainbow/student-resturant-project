@@ -1,6 +1,7 @@
 <?php namespace App\ModelFilters;
 
 use EloquentFilter\ModelFilter;
+use Carbon\Carbon;
 
 class ReservationFilter extends ModelFilter
 {
@@ -31,5 +32,18 @@ class ReservationFilter extends ModelFilter
         return $this->where(function ($q) use ($value) {
             return $q->where('type', '=', $value);
         });
+    }
+
+    public function fromDate($date)
+    {
+        $from_date = Carbon::instance(new \DateTime($date));
+
+        if ($this->input('to_date') != '') {
+            $to_date = Carbon::instance(new \DateTime($this->input('to_date')));
+            return $this->whereBetween('date_time', [$from_date, $to_date]);
+        }
+
+        return $this->where('date_time',$from_date);
+
     }
 }

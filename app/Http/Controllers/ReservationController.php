@@ -28,6 +28,10 @@ class ReservationController extends Controller
 
     public function next(Request $request)
     {
+        $tables = Table::with('reservations')->whereDoesntHave('reservations', function ($query) use ($request) {
+            $query->where('date_time', Carbon::instance(new \DateTime($request->date_time))->toDateTimeString());
+        })->get();
+
         $menus = Menu::with('type')->get();
         $detail = $request->all();
 
@@ -48,7 +52,7 @@ class ReservationController extends Controller
             $ac_net_price = 0;
         }
 
-        return view('reservation-food', compact('menus', 'detail', 'member', 'accumulate'));
+        return view('reservation-food', compact('menus', 'detail', 'member', 'accumulate', 'tables'));
     }
 
 
@@ -71,10 +75,7 @@ class ReservationController extends Controller
             'date_time' => Carbon::instance(new \DateTime($detail['date_time']))->toDateTimeString()
         ]);
 
-        if (isset($detail['table'])) {
-            $tables = collect($detail['table']);
-            $reservation->tables()->sync($tables);
-        }
+        $reservation->tables()->sync($request->table);
 
         $menus = collect($request->menus);
         $menus->each(function ($menu) use ($reservation) {

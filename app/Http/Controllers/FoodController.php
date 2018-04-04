@@ -23,6 +23,8 @@ class FoodController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'img' => '/storage/' . $path,
+            'promotion' => $request->promotion,
+            'description' => $request->description,
             'menu_type_id' => $request->type,
             'user_id' => Auth::user()->id
         ]);
@@ -46,6 +48,8 @@ class FoodController extends Controller
         $food->update([
             'name' => $request->name,
             'price' => $request->price,
+            'description' => $request->description,
+            'promotion' => $request->promotion,
             'menu_type_id' => $request->type,
         ]);
 

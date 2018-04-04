@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,11 +20,13 @@
     h2 {
       font-family: 'Kanit', sans-serif;
     }
+
     a {
       text-decoration: none;
     }
   </style>
 </head>
+
 <body>
   <div id="app" class="ui container">
     <div class="ui secondary  menu">
@@ -32,19 +35,13 @@
       </a>
       <a href="/reservation/" class=" item">
         ประวัติสำรองที่นั่ง
-      </a>
-
-      @if(Auth::user()->type->name == 'admin')
-        <a href="/table" class="item">
+      </a> @if(Auth::user()->type->name == 'admin')
+      <a href="/table" class="item">
                     โต๊ะอาหาร
-        </a>
-      @endif
-
-      @if(Auth::user()->type->name == 'admin')
-        <a href="/tabletype" class="item">
+        </a> @endif @if(Auth::user()->type->name == 'admin')
+      <a href="/tabletype" class="item">
           ประเภทโต๊ะ
-        </a>
-      @endif
+        </a> @endif
 
       <a href="/food" class="item">
         เมนูอาหาร
@@ -55,27 +52,26 @@
       </a>
       <a href="/member" class="item">
         สมาชิก
-      </a>
-      
-      @if(Auth::user()->type->name == 'admin')
+      </a> @if(Auth::user()->type->name == 'admin')
       <a href="/user" class="item">
         ผู้ใช้งาน
-      </a>
-      @endif
+      </a> @endif
 
       <div class="right menu">
-      
-      <a href="/logout" class="ui item">
+
+        <a href="/logout" class="ui item">
         Logout
       </a>
       </div>
     </div>
+
+
     
 @section('content') @show
   </div>
   {{--
-  <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous">
+  <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+
   </script>
   <script src="/semantic/semantic.js"></script> --}}
   <script src="/js/app.js"></script>
@@ -86,8 +82,18 @@
     $('.ui.radio.checkbox').checkbox();
         $('.ui.dropdown').dropdown();
         $('#example5').calendar();
+        $('#from_date').calendar({
+          type: 'date'
+        });
+
+         $('#to_date').calendar({
+          type: 'date'
+        });
   </script>
+
+
   
 @section('script') @show
 </body>
+
 </html>

@@ -64,6 +64,6 @@ class UserController extends Controller
         ]);
 
             
-        return redirect('/login');
+        return redirect('/user');
     }
 }

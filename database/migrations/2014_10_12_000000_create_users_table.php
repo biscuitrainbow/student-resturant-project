@@ -59,8 +59,10 @@ class CreateUsersTable extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->integer('price');
+            $table->boolean('promotion');
+            $table->text('description')->nullable();
             $table->integer('menu_type_id')->unsigned();
             $table->foreign('menu_type_id')->references('id')->on('menu_types')->onDelete('cascade');
             $table->integer('user_id')->unsigned();

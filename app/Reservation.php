@@ -17,6 +17,11 @@ class Reservation extends Model
         return $this->belongsTo(Member::class, 'member_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function tables()
     {
         return $this->belongsToMany(Table::class, 'reservations_tables')->withTimestamps();
@@ -26,5 +31,7 @@ class Reservation extends Model
     {
         return $this->belongsToMany(Menu::class, 'reservations_menus')->withTimestamps()->withPivot('quantity', 'discount');
     }
+
+    
 
 }

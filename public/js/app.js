@@ -43044,7 +43044,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -43053,9 +43053,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7168fb6a", Component.options)
+    hotAPI.createRecord("data-v-0ca92eac", Component.options)
   } else {
-    hotAPI.reload("data-v-7168fb6a", Component.options)
+    hotAPI.reload("data-v-0ca92eac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -43133,7 +43133,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
   }
 }
 
@@ -43163,7 +43163,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ReservationFood.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ReservationFood.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -43172,9 +43172,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2ba6573a", Component.options)
+    hotAPI.createRecord("data-v-757081ba", Component.options)
   } else {
-    hotAPI.reload("data-v-2ba6573a", Component.options)
+    hotAPI.reload("data-v-757081ba", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -43202,31 +43202,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     add: function add(food) {
-      if (this.member == 1) {
-        if (food.type.name !== "อาหารชุด" && food.type.name !== "เครื่องดื่ม") {
-          this.netPrice += food.price - food.price * 0.1;
-          this.totalPrice += food.price;
-          food.discount = food.price * 0.1;
+      if (this.selectedFood.indexOf(food) < 0) {
+        console.log("Add");
+
+        if (this.member == 1) {
+          if (food.promotion == 1) {
+            this.netPrice += food.price - food.price * 0.1;
+            this.totalPrice += food.price;
+            food.discount = food.price * 0.1;
+          } else {
+            this.netPrice += food.price;
+            this.totalPrice += food.price;
+            food.discount = 0;
+          }
         } else {
           this.netPrice += food.price;
           this.totalPrice += food.price;
           food.discount = 0;
         }
-      } else {
-        this.netPrice += food.price;
-        this.totalPrice += food.price;
-        food.discount = 0;
-      }
 
-      food.qty = 1;
-      this.selectedFood.push(food);
+        food.qty = 1;
+        this.selectedFood.push(food);
+      } else {
+        console.log("Increse");
+        this.increase(food);
+      }
     },
 
     increase: function increase(food) {
       food.qty++;
 
       if (this.member == 1) {
-        if (food.type.name !== "อาหารชุด" && food.type.name !== "เครื่องดื่ม") {
+        if (food.promotion == 1) {
           this.netPrice += food.price - food.price * 0.1;
           this.totalPrice += food.price;
         } else {
@@ -43243,7 +43250,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       food.qty--;
 
       if (this.member == 1) {
-        if (food.type.name !== "อาหารชุด" && food.type.name !== "เครื่องดื่ม") {
+        if (food.promotion == 1) {
           this.netPrice -= food.price - food.price * 0.1;
           this.totalPrice -= food.price;
         } else {
@@ -43253,6 +43260,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } else {
         this.netPrice -= food.price;
         this.totalPrice -= food.price;
+      }
+    },
+    remove: function remove(index, food) {
+      this.selectedFood.splice(index, 1);
+
+      console.log(food);
+
+      if (this.member == 1) {
+        if (food.promotion == 1) {
+          this.netPrice -= (food.price - food.price * 0.1) * food.qty;
+          this.totalPrice -= food.price * food.qty;
+        } else {
+          this.netPrice -= food.price * food.qty;
+          this.totalPrice -= food.price * food.qty;
+        }
+      } else {
+        this.netPrice -= food.price * food.qty;
+        this.totalPrice -= food.price * food.qty;
       }
     }
   }
@@ -43284,7 +43309,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ReservationInfo.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ReservationInfo.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -43293,9 +43318,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-43acf69a", Component.options)
+    hotAPI.createRecord("data-v-8d77211a", Component.options)
   } else {
-    hotAPI.reload("data-v-43acf69a", Component.options)
+    hotAPI.reload("data-v-8d77211a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
