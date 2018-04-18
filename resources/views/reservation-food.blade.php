@@ -78,8 +78,11 @@
       </div>
     </div>
     <h3 class="my-8">อาหารทั้งหมด</h3>
+    <div class="ui input mb-8 w-1/3">
+      <input type="text"  v-model="searchString" placeholder="Search...">
+    </div>
     <div class="ui grid mt-8">
-      <div v-for="menu in menus" class="four wide column">
+      <div v-for="menu in filteredFood" class="four wide column">
         <div class="ui card">
           <div class="content">
             <div class="header">

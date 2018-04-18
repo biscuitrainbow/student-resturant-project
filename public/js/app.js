@@ -43195,10 +43195,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ["menus", "member", "accumulate"],
   data: function data() {
     return {
+      searchString: "",
       netPrice: 0,
       totalPrice: 0,
       selectedFood: []
     };
+  },
+  computed: {
+    filteredFood: function filteredFood() {
+      var menu_array = this.menus,
+          searchString = this.searchString;
+
+      if (!searchString) {
+        return menu_array;
+      }
+
+      searchString = searchString.trim().toLowerCase();
+
+      menu_array = menu_array.filter(function (item) {
+        if (item.name.toLowerCase().indexOf(searchString) !== -1) {
+          return item;
+        }
+      });
+
+      return menu_array;
+    }
   },
   methods: {
     add: function add(food) {
