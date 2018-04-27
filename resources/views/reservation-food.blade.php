@@ -74,7 +74,7 @@
     <div v-show="netPrice + accumulate >= 10000" class="ui positive message">
       <i class="close icon"></i>
       <div class="header">
-        ลูกค้ามียอดรวมครบ 1000
+        ลูกค้ามียอดรวมครบ 10000
       </div>
     </div>
     <h3 class="my-8">อาหารทั้งหมด</h3>
@@ -88,7 +88,7 @@
             <div class="header">
               @{{ menu.name }}
               <a class="item">
-                <div class="ui  horizontal label">@{{ menu.id }}</div>
+                <div class="ui  horizontal label">@{{ menu.type.name }}</div>
               </a>
             </div>
             <div class="meta">

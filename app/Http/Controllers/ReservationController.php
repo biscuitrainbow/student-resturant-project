@@ -38,7 +38,7 @@ class ReservationController extends Controller
         if ($request->filled('member')) {
             $member = 1;
 
-            $m = Member::find($request->member);;
+            $m = Member::find($request->member);
 
             $accumulate_array = $m->reservations->map(function ($item, $key) {
                 return $item->net_price;
