@@ -3,7 +3,7 @@
 <form class="ui form flex flex-col items-center mt-8" action="/table/edit/{{$table->id}}" method="post">
   {{csrf_field()}}
      
-  <h2 class="my-8">เพิ่มโต๊ะอาหาร</h2>
+  <h2 class="my-8">แก้ไขโต๊ะอาหาร</h2>
      <div class="field w-2/5">
        <label>เลขโต๊ะ</label>
        <input type="text" name="name" value="{{$table->name}}" placeholder="เลขโต๊ะ">
@@ -24,7 +24,7 @@
               </div>
              @endforeach
       </div>
-           <button class="ui button w-2/5 mt-4" type="submit" >เพิ่ม</button>
+           <button class="ui button w-2/5 mt-4" type="submit" >บันทึก</button>
  
    </form>
 @endsection
