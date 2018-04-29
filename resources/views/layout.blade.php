@@ -30,30 +30,30 @@
 <body>
   <div id="app" class="ui container">
     <div class="ui secondary  menu">
-      <a href="/reservation/create" class="active item">
-        สำรองที่นั่ง
+      <a href="/reservation/create" class="@if(request()->path() == 'reservation/create') {{"active"}} @endif item">
+        สำรองที่นั่ง 
       </a>
-      <a href="/reservation/" class=" item">
+      <a href="/reservation/" class="@if(request()->path() == 'reservation') {{"active"}} @endif item">
         ประวัติสำรองที่นั่ง
       </a> @if(Auth::user()->type->name == 'admin')
-      <a href="/table" class="item">
+      <a href="/table"  class="@if(request()->path() == 'table') {{"active"}} @endif item">
                     โต๊ะอาหาร
         </a> @endif @if(Auth::user()->type->name == 'admin')
-      <a href="/tabletype" class="item">
+      <a href="/tabletype"  class="@if(request()->path() == 'tabletype') {{"active"}} @endif item">
           ประเภทโต๊ะ
         </a> @endif
 
-      <a href="/food" class="item">
+      <a href="/food" class="@if(strpos(request()->path(),'food') !== false) {{"active"}} @endif item">
         เมนูอาหาร
       </a>
 
-      <a href="/menutype" class="item">
+      <a href="/menutype" class="@if(strpos(request()->path(),'menutype') !== false) {{"active"}} @endif item">
         ประเภทเมนูอาหาร
       </a>
-      <a href="/member" class="item">
+      <a href="/member" class="@if(strpos(request()->path(),'member') !== false) {{"active"}} @endif item">
         สมาชิก
       </a> @if(Auth::user()->type->name == 'admin')
-      <a href="/user" class="item">
+      <a href="/user" class="@if(strpos(request()->path(),'user') !== false) {{"active"}} @endif item">
         ผู้ใช้งาน
       </a> @endif
 
