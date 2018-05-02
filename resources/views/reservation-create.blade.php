@@ -49,14 +49,29 @@
       </div>
     </div>
   </div>
-  {{-- <div class="field w-2/5">
-    <label>โต๊ะ</label>
-    <select name="table[]" multiple="" class="ui fluid dropdown">
-            @foreach($tables as $table)
-            <option value="{{$table->id}}">{{$table->name}}</option>
-            @endforeach
-       </select>
-  </div> --}}
+
+  <div class="inline fields">
+    <label>ช่วงเวลา</label>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input type="radio" name="section" value="เช้า" checked="checked">
+        <label>เช้า</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input type="radio" name="section" value="บ่าย">
+        <label>บ่าย</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input type="radio" name="section" value="เย็น">
+        <label>เย็น</label>
+      </div>
+    </div>
+  </div>
+
   <div class="field w-2/5">
     <div class="ui calendar" id="example5">
       <label>วันเวลา</label>
@@ -66,6 +81,8 @@
       </div>
     </div>
   </div>
+
+ 
 
   <button class="ui button w-2/5 mt-4" type="submit">ยืนยัน</button>
 

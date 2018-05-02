@@ -11,6 +11,31 @@
         </a>
     </div>
 </div>
+<form action="/reservation/update/{{$reservation->id}}" method="post" class="mb-8">
+    {{csrf_field()}}
+    <div class="flex items-center">
+            <div class="field w-1/5 mr-8">
+                    <label class="">สถานะ</label>
+                    <div class="ui fluid search selection dropdown mt-2">
+                        <input type="hidden" name="status">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">สถานะ</div>
+
+                        <div class="menu">
+                        
+                         <div class="item" data-value="Complete" value="Complete">Complete</div>
+                         <div class="item" data-value="Confirmed" value="Confirmed">Confirmed</div>
+                         <div class="item" data-value="Waiting" value="Waiting">Waiting</div>
+                         <div class="item" data-value="Cancel" value="Cancel">Cancel</div>
+
+                        </div>
+                    </div>
+            </div>
+            <div class="ui item mt-6 ml-6">
+                <button class="ui button" type="submit" >อัพเดตสถานะ</button>
+            </div>
+</div>
+</form>
 <table class="ui  green table">
       <thead>
       <tr>
@@ -20,6 +45,7 @@
         <th>วัน/เวลา</th>
         <th>จำนวนที่นั่ง</th>
         <th>โต๊ะ</th>
+        <th>สถานะ</th>
         <th>ประเภท</th>
         <th>Action</th>
       </tr>
@@ -60,8 +86,27 @@
           <a class="ui basic label">{{$table->name}}</a>
           @endforeach
         </td>    
+        
         <td>
-        <a class="ui green label">{{$reservation->type}}</a>
+            @if($reservation->status == 'Waiting')
+                <a class="ui yellow label">{{$reservation->status}}</a>
+            @endif
+
+            @if($reservation->status == 'Cancel')
+                <a class="ui red label">{{$reservation->status}}</a>
+             @endif
+
+            @if($reservation->status == 'Confirmed')
+                <a class="ui white label">{{$reservation->status}}</a>
+            @endif
+
+            @if($reservation->status == 'Complete')
+                <a class="ui green label">{{$reservation->status}}</a>
+            @endif
+            </td>
+
+        <td>
+            {{$reservation->type}}
         </td>
         <td>
             {{--  <a href="/reservation/edit/{{$reservation->id}}">

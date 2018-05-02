@@ -32,10 +32,17 @@ class FoodController extends Controller
         return redirect('/food/');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $menus = Menu::all();
-        return view('food-index', compact('menus'));
+        $types = MenuType::all();
+
+        if ($request->filled('type') && $request->has('type')) {
+            $menus = MenuType::find($request->type)->menu;
+        } else {
+            $menus = Menu::all();
+        }
+
+        return view('food-index', compact('menus', 'types'));
     }
     public function edit(Menu $food)
     {

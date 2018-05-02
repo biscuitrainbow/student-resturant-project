@@ -28,8 +28,9 @@ class ReservationController extends Controller
 
     public function next(Request $request)
     {
+        
         $tables = Table::with('reservations')->whereDoesntHave('reservations', function ($query) use ($request) {
-            $query->where('date_time', Carbon::instance(new \DateTime($request->date_time))->toDateTimeString());
+            $query->whereDate('date_time', Carbon::instance(new \DateTime($request->date_time))->toDateTimeString())->where('section',$request->section);
         })->orderBy('name')->get();
 
         $menus = Menu::with('type')->orderBy('menu_type_id')->get();
@@ -69,9 +70,10 @@ class ReservationController extends Controller
             'user_id' => Auth::user()->id,
             'seat' => $detail['seat'],
             'type' => $detail['type'],
+            'section' => $detail['section'],
             'total_price' => $request->total_price,
             'net_price' => $request->net_price,
-
+            'status' => 'Waiting',
             'date_time' => Carbon::instance(new \DateTime($detail['date_time']))->toDateTimeString()
         ]);
 
@@ -93,10 +95,17 @@ class ReservationController extends Controller
             return $item->net_price;
         });
 
+        $menus = $reservations->map(function($rev){
+            return $rev->menus;
+        });
+
+        $menus = $menus->flatten();
+
+
         $net_price = $price_array->sum();
 
         if ($request->has('print')) {
-            $pdf = PDF::loadView('reservation-index-pdf', compact('reservations', 'net_price'));
+            $pdf = PDF::loadView('reservation-index-pdf', compact('reservations', 'net_price','menus'));
             return $pdf->download('invoice.pdf');
         }
 
@@ -130,5 +139,14 @@ class ReservationController extends Controller
     public function filter(Request $request)
     {
         return Reservation::filter($request->all())->get();
+    }
+
+    public function update(Reservation $reservation,Request $request){
+
+         $reservation->update([
+             'status' => $request->status
+         ]);
+
+         return redirect()->back();
     }
 }

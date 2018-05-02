@@ -20,6 +20,14 @@ class ReservationFilter extends ModelFilter
         });
     }
 
+
+    public function status($value)
+    {
+        return $this->where(function ($q) use ($value) {
+            return $q->where('status', '=', $value);
+        });
+    }
+
     public function month($value)
     {
         return $this->where(function ($q) use ($value) {

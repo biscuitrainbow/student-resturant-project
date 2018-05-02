@@ -34,7 +34,7 @@
 
 <form action="/reservation" class="mb-8">
     <dic class="flex mb-4">
-        <div class="field">
+        <div class="field w-1/5">
             <p>วันที่</p>
             <div class="ui calendar mr-8" id="from_date">
                 <div class="ui input left icon">
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div class="field ">
+        <div class="field w-1/5 ">
             <p>ถึงวันที่</p>
 
             <div class="ui calendar" id="to_date">
@@ -93,7 +93,7 @@
                 </div>
             </div>
         </div>
-        <div class="field w-1/5">
+        <div class="field w-1/5 mr-8">
             <label class="">ประเภท</label>
             <div class="ui fluid search selection dropdown mt-2">
                 <input type="hidden" name="type">
@@ -106,6 +106,24 @@
                 </div>
             </div>
         </div>
+
+        <div class="field w-1/5">
+            <label class="">สถานะ</label>
+            <div class="ui fluid search selection dropdown mt-2">
+                <input type="hidden" name="status">
+                <i class="dropdown icon"></i>
+                <div class="default text">สถานะ</div>
+
+                <div class="menu">
+                
+                 <div class="item" data-value="Complete" value="Complete">Complete</div>
+                 <div class="item" data-value="Confirmed" value="Confirmed">Confirmed</div>
+                 <div class="item" data-value="Waiting" value="Waiting">Waiting</div>
+                 <div class="item" data-value="Cancel" value="Cancel">Cancel</div>
+
+                </div>
+            </div>
+    </div>
 
         <div class="ui item mt-6 ml-6">
             <button class="ui button" type="submit">เรียกดูข้อมูล</button>
@@ -122,6 +140,8 @@
             <th>วัน/เวลา</th>
             <th>จำนวนที่นั่ง</th>
             <th>ประเภท</th>
+            <th>สถานะ</th>
+            <th>เหลือเวลา</th>
             <th>ราคารวม</th>
             <th>พนักงาน</th>
             <th>Action</th>
@@ -147,7 +167,27 @@
                 {{$reservation->seat}}
             </td>
             <td>
-                <a class="ui green label">{{$reservation->type}}</a>
+                {{$reservation->type}}
+            </td>
+            <td>
+            @if($reservation->status == 'Waiting')
+                <a class="ui yellow label">{{$reservation->status}}</a>
+            @endif
+
+            @if($reservation->status == 'Cancel')
+                <a class="ui red label">{{$reservation->status}}</a>
+             @endif
+
+            @if($reservation->status == 'Confirmed')
+                <a class="ui white label">{{$reservation->status}}</a>
+            @endif
+
+            @if($reservation->status == 'Complete')
+                <a class="ui green label">{{$reservation->status}}</a>
+            @endif
+            </td>
+            <td>
+                {{$reservation->fromNow()}}
             </td>
             <td>
                 {{$reservation->total_price}} .-

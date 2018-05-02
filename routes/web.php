@@ -43,6 +43,8 @@ Route::get('/reservation/print/{reservation}', 'ReservationController@printRecei
 Route::get('/rev/print/', 'ReservationController@printReport')->middleware('auth');
 Route::get('/rev/filter/test', 'ReservationController@filter');
 
+Route::post('/reservation/update/{reservation}', 'ReservationController@update')->middleware('auth');
+
 Route::get('/table/create', 'TableController@create')->middleware('auth');
 Route::post('/table/create', 'TableController@store')->middleware('auth');
 Route::get('/table', 'TableController@index')->middleware('auth');

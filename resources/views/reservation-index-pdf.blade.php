@@ -85,6 +85,20 @@
         @endforeach
        
       </table>
+
+      <h2 style="margin-top:50px;">รายการอาหาร</h2>
+  <table class="w3-table w3-striped">
+    <tr>
+      <td>ชื่อ</td>
+      <td>จำนวน</td>
+    </tr>
+    @foreach($menus as $menu)
+    <tr>
+      <td>{{$menu->name}}</td>
+      <td>{{$menu->pivot->quantity}}</td>
+    </tr>
+    @endforeach
+  </table>
 </div>
 
 </body>

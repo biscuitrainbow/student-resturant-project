@@ -6,6 +6,32 @@
                 <button class="ui button" type="submit" >เพิ่มเมนู</button>
         </a>
 </div>
+
+<form action="/food" class="mb-8">
+    <div class="flex items-center">
+            <div class="field w-1/5 mr-8">
+                    <label class="">ประเภท</label>
+                    <div class="ui fluid search selection dropdown mt-2">
+                        <input type="hidden" name="type">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">ประเภท</div>
+
+                        <div class="menu">
+                        
+                        @foreach($types as $type)
+                        <div class="item" data-value="{{$type->id}}" value="{{$type->id}}">{{$type->name}}</div>
+                        @endforeach
+                      
+                        </div>
+                    </div>
+            </div>
+            <div class="ui item mt-6 ml-6">
+                <button class="ui button" type="submit" >เรียกดูข้อมูล</button>
+            </div>
+</div>
+</form>
+
+
 <table class="ui basic table">
     @foreach($menus as $menu)
     <div class="flex my-8 p-4 bg-grey-lighter shadow">
@@ -42,4 +68,5 @@
 
     </div>
     @endforeach
+</table>
 @endsection
