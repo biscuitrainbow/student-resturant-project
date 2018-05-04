@@ -30,7 +30,9 @@ class ReservationController extends Controller
     {
         
         $tables = Table::with('reservations')->whereDoesntHave('reservations', function ($query) use ($request) {
-            $query->whereDate('date_time', Carbon::instance(new \DateTime($request->date_time))->toDateTimeString())->orWhere('section',$request->section);
+            //$query->whereDate('date_time', Carbon::instance(new \DateTime($request->date_time))->toDateTimeString())->orWhere('section',$request->section);
+            $query::where('section',$request->section);
+
         })->orderBy('name')->get();
 
         $menus = Menu::with('type')->orderBy('menu_type_id')->get();
