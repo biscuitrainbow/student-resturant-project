@@ -95,7 +95,7 @@
     @foreach($menus as $menu)
     <tr>
       <td>{{$menu->name}}</td>
-      <td>{{$menu->pivot->quantity}}</td>
+      <td>{{$menu->qty}}</td>
     </tr>
     @endforeach
   </table>

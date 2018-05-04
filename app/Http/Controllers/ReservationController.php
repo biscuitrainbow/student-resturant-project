@@ -28,9 +28,9 @@ class ReservationController extends Controller
 
     public function next(Request $request)
     {
-        
+
         $tables = Table::with('reservations')->whereDoesntHave('reservations', function ($query) use ($request) {
-            $query->whereDate('date_time',Carbon::instance(new \DateTime($request->date_time))->toDateString())->where('section',$request->section);
+            $query->whereDate('date_time', Carbon::instance(new \DateTime($request->date_time))->toDateString())->where('section', $request->section);
         })->orderBy('name')->get();
 
         $menus = Menu::with('type')->orderBy('menu_type_id')->get();
@@ -95,17 +95,24 @@ class ReservationController extends Controller
             return $item->net_price;
         });
 
-        $menus = $reservations->map(function($rev){
+        $menus = $reservations->map(function ($rev) {
             return $rev->menus;
         });
 
         $menus = $menus->flatten();
+        $unique_menu = $menus->unique('name');
+
+        $menus = $unique_menu->map(function ($menu) use ($menus) {
+            $menu->qty = $menus->where('id', $menu->id)->count();
+            return $menu;
+        });
+
 
 
         $net_price = $price_array->sum();
 
         if ($request->has('print')) {
-            $pdf = PDF::loadView('reservation-index-pdf', compact('reservations', 'net_price','menus'));
+            $pdf = PDF::loadView('reservation-index-pdf', compact('reservations', 'net_price', 'menus'));
             return $pdf->download('invoice.pdf');
         }
 
@@ -141,12 +148,13 @@ class ReservationController extends Controller
         return Reservation::filter($request->all())->get();
     }
 
-    public function update(Reservation $reservation,Request $request){
+    public function update(Reservation $reservation, Request $request)
+    {
 
-         $reservation->update([
-             'status' => $request->status
-         ]);
+        $reservation->update([
+            'status' => $request->status
+        ]);
 
-         return redirect()->back();
+        return redirect()->back();
     }
 }
