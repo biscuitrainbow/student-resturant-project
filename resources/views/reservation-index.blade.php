@@ -161,7 +161,7 @@
                 @if($reservation->member_id == null) {{$reservation->tel}} @else {{$reservation->member->tel}} @endif
             </td>
             <td>
-                {{$reservation->date_time}}
+                {{$reservation->date_time->toDayDateTimeString()}} ({{$reservation->section}})
             </td>
             <td>
                 {{$reservation->seat}}
